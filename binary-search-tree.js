@@ -19,6 +19,21 @@ class Node {
 
   insertRecursively(val) {
 
+    if(!this.left?.insertRecursively(val)){
+      if (val < this.val){
+        const newNode = new Node(val, this.left);
+        this.left = newNode;
+        return newNode;
+      }
+    }
+    //Do something
+    if(!this.right?.insertRecursively(val)){
+      if (val > this.val) {
+        const newNode = new Node(val, null, this.right);
+        this.right = newNode;
+        return newNode;
+      }
+    }
   }
 
   /** dfsPreOrder(): Traverse from the invoking node using pre-order DFS.
@@ -62,45 +77,57 @@ class BinarySearchTree {
 
   insert(val) {
 
-    console.log('val', val);
-    const newNode = new Node(val);
+    // console.log('val', val);
+    // const newNode = new Node(val);
 
-    if(!this.root){
-      this.root = newNode
-    }
+    // if(!this.root){
+    //   this.root = newNode
+    //   return this;
+    // }
 
-    let currNode = this.root;
-    console.log('currNode', currNode);
-    while(currNode){
-      if(newNode.val < currNode.val){
-        console.log('left inside loop', currNode);
-        if(newNode.val > currNode.left?.val || !currNode.left){
-          newNode.left =  currNode.left;
-          currNode.left = newNode;
-          return this;
-        }
-        currNode = currNode.left;
+    // let currNode = this.root;
+    // console.log('currNode', currNode);
+    // while(!newNode.left && !newNode.right){
+    //   if(newNode.val < currNode.val){
+    //     if(!currNode.left){
+    //       currNode.left = newNode;
+    //       return this;
+    //     }
+    //     if(newNode.val > currNode.left.val && newNode.val < currNode.left.right.val){
+    //       newNode.right = currNode.left.right;
+    //     }
+    //     if(newNode.val > currNode.left.val && newNode.val > currNode.left.left.val){
+    //       newNode.left = currNode.left.left;
+    //     }
+    //     currNode = currNode.left;
 
-      }
-      else{
-        console.log('right inside loop', currNode);
-        if(newNode.val < currNode.right?.val || !currNode.right){
-          newNode.right =  currNode.right;
-          currNode.right = newNode;
-          return this;
-        }
+    //   }
+    //   else{
+    //     if (!currNode.right) {
+    //       currNode.left = newNode;
+    //       return this;
+    //     }
+    //     if (newNode.val > currNode.left.val && newNode.val < currNode.left.right.val) {
+    //       newNode.right = currNode.left.right;
+    //     }
+    //     if (newNode.val > currNode.left.val && newNode.val > currNode.left.left.val) {
+    //       newNode.left = currNode.left.left;
+    //     }
+    //     currNode = currNode.left;
+    //   }
+    // }
 
-        currNode = currNode.right;
-      }
-    }
-
-    return this;
+    // return this;
   }
 
   /** insertRecursively(val): Insert a new node into the BST with value val.
    * Returns the tree instance. Uses recursion. */
 
   insertRecursively(val) {
+    if(!this.root){
+      this.root = new Node(val);
+    }
+    this.root.insertRecursively(val);
 
   }
 
