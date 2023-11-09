@@ -12,6 +12,7 @@ class Node {
 
   findRecursively(val) {
 
+
   }
 
   /** insertRecursively(val): Starting at the invoking node, insert a new node
@@ -146,7 +147,17 @@ class BinarySearchTree {
    * Returns the node, if found; else undefined. Uses iteration. */
 
   find(val) {
+    let current = this;
 
+    while(current){
+      if(current.val === val){
+        return current;
+      }
+
+      current = (val < current.val)
+        ? current.left
+        : current.right;
+    }
   }
 
   /** findRecursively(val): Search the BST for a node with value val.
